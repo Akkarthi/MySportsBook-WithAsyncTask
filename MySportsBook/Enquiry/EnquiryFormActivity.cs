@@ -38,7 +38,6 @@ namespace MySportsBook
         private TextView txtEnquiryGame;
         private TextView txtEnquiryComment;
         private LinearLayout llEnquiryFeedbackContainer;
-        private LinearLayout llEnquiryFeedback;
         TextView txtCommentHeader;
         string isNewEnquiry = string.Empty;
         LinearLayout llCommentContainer;
@@ -176,7 +175,6 @@ namespace MySportsBook
                             textview.SetTextColor(Color.ParseColor("#000000"));
                             textview.SetTypeface(faceRegular, TypefaceStyle.Normal);
 
-
                             llEnquiryFeedbackContainer.AddView(textview, textViewParam);
 
                             if (i < selectedEnquiryModel.Comments.Count)
@@ -187,11 +185,8 @@ namespace MySportsBook
 
                                 llEnquiryFeedbackContainer.AddView(v, viewParam);
                             }
-
                         }
-                    }
-
-                    
+                    }                    
                 }
             }
             else
@@ -301,9 +296,7 @@ namespace MySportsBook
                 //linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
                 if (helper.CheckInternetConnection(this))
                 {
-
                     EnquiryModel enquiryModel = new EnquiryModel();
-
 
                     ServiceHelper serviceHelper = new ServiceHelper();
 
@@ -317,10 +310,8 @@ namespace MySportsBook
 
                     List<string> enquiryCommentsList = new List<string>();
 
-
                     if (isNewEnquiry == "1")
                     {
-
                         enquiryCommentsList.Add(editTextEnquiryComment.Text);
                         enquiryModel.Comments = enquiryCommentsList;
                         enquiryModel.EnquiryId = selectedEnquiryModel.EnquiryId;

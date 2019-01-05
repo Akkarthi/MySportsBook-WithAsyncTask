@@ -54,12 +54,8 @@ namespace MySportsBook
 
             editTextSearchInvoiceUser.TextChanged += EditTextSearchInvoiceUser_TextChanged;
 
-           
-
-            linearProgressBar.Visibility = ViewStates.Visible;
-            new Thread(new ThreadStart(delegate { RunOnUiThread(async () => { await LoadInvoiceUser(commonDetails); }); }))
-                .Start();
-
+            LoadInvoiceUser(commonDetails);
+            
         }
 
         private void EditTextSearchInvoiceUser_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -72,7 +68,7 @@ namespace MySportsBook
             invoiceUserListView.Adapter = invoiceUser_ItemAdapter;
         }
 
-        private async Task LoadInvoiceUser(CommonDetails details)
+        private void LoadInvoiceUser(CommonDetails details)
         {
             ServiceHelper serviceHelper = new ServiceHelper();
             if (helper.CheckInternetConnection(this))

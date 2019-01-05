@@ -85,16 +85,8 @@ namespace MySportsBook
 
 
 
-            linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
 
-            new Thread(new ThreadStart(delegate
-            {
-                RunOnUiThread(async () =>
-                {
-                    await LoadPlayer(commonDetails, Convert.ToDateTime(txtSelectDate.Text));
-                    //linearProgressBar.Visibility = Android.Views.ViewStates.Gone;
-                });
-            })).Start();
+            LoadPlayer(commonDetails, Convert.ToDateTime(txtSelectDate.Text));
 
             btnSubmit.Click += btnSubmit_Click;
             //btnGo.Click += btnGo_Click;
@@ -137,7 +129,7 @@ namespace MySportsBook
             editTextSearchPlayer.Visibility = ViewStates.Visible;
         }
 
-        public async Task LoadPlayer(CommonDetails details, DateTime selecteDateTime)
+        public void LoadPlayer(CommonDetails details, DateTime selecteDateTime)
         {
             if (helper.CheckInternetConnection(this))
             {

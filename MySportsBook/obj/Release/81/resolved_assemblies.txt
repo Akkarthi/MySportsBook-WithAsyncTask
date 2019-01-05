@@ -1,15 +1,15 @@
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\MySportsBook.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Java.Interop.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Microsoft.CSharp.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Mono.Android.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\mscorlib.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Newtonsoft.Json.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Core.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Net.Http.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Xml.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Xml.Linq.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Xamarin.Android.Support.v4.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Runtime.Serialization.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\System.Numerics.dll
-D:\PROJECT\Xamarin\MySportsBook - Copy (2)\MySportsBook\obj\Release\81\android\assets\Mono.Security.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\MySportsBook.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Java.Interop.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Microsoft.CSharp.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Mono.Android.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\mscorlib.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Newtonsoft.Json.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Core.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Net.Http.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Xml.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Xml.Linq.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Xamarin.Android.Support.v4.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Runtime.Serialization.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\System.Numerics.dll
+D:\PROJECT\Xamarin\MySportsBookPerformance\MySportsBook-WithAsyncTask\MySportsBook\obj\Release\81\android\assets\Mono.Security.dll

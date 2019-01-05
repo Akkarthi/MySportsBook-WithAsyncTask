@@ -72,7 +72,6 @@ namespace MySportsBook
 
                 TextView txtAlertDialogHeading;
                 TextView txtAlertDialogMessage;
-                LinearLayout llAlertDialogButton;
                 TextView txtAlertDialogButton;
 
                 Typeface faceRegular = Typeface.CreateFromAsset(Application.Context.Assets, "fonts/Montserrat-Regular.otf");

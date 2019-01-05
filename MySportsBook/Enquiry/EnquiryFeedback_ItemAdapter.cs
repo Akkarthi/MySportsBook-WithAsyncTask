@@ -18,7 +18,6 @@ namespace MySportsBook
 
         Activity context;
         IList<EnquiryFeedback> _items;
-        bool ViewEnquiryUserFirstClick = true;
         private LinearLayout progress;
         private CommonDetails commonDetails;
         Helper helper = new Helper();
@@ -69,8 +68,5 @@ namespace MySportsBook
         {
             get { return _items.Count; }
         }
-
-        
-
     }
 }

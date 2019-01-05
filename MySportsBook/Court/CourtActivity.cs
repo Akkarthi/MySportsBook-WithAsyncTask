@@ -18,7 +18,6 @@ namespace MySportsBook
     {
         ListView courtListView;
         public static List<Court> _items;
-        Court_ItemAdapter court_ItemAdapter;
         TextView lblHeader;
         LinearLayout linearProgressBar;
         private CommonDetails commonDetails;

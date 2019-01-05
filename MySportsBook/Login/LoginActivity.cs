@@ -77,16 +77,7 @@ namespace MySportsBook
 
             btnLoginButton.Click += delegate
             {
-                linearProgressBar.Visibility = ViewStates.Visible;
-                new Thread(new ThreadStart(delegate
-                {
-                    RunOnUiThread(async () =>
-                    {
-                        await LoginEvent();
-                    });
-                })).Start();
-
-
+                LoginEvent();
             };
 
             #endregion[Login]
@@ -107,20 +98,14 @@ namespace MySportsBook
             {
                 userName.Text = oStorageHelper.GetStringFromStorage("username");
                 password.Text = oStorageHelper.GetStringFromStorage("password");
-                linearProgressBar.Visibility = ViewStates.Visible;
-                new Thread(new ThreadStart(delegate
-                {
-                    RunOnUiThread(async () =>
-                    {
-                        await LoginEvent();
-                    });
-                })).Start();
+                //linearProgressBar.Visibility = ViewStates.Visible;
+                LoginEvent();
             }
 
 
         }
 
-        private async Task LoginEvent()
+        private void LoginEvent()
         {
             isInternetConnection = false;
             Context mContext = Android.App.Application.Context;

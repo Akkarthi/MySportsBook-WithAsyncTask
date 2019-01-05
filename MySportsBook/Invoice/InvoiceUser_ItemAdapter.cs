@@ -76,14 +76,7 @@ namespace MySportsBook
             llInvoiceUserContainer.Click += delegate
             {
 
-                //progress.Visibility = Android.Views.ViewStates.Visible;
-                new Thread(new ThreadStart(delegate
-                {
-                    context.RunOnUiThread(async () => { await LoadEnquiryUserDetails(_items[position].PlayerId, commonDetails); //progress.Visibility = Android.Views.ViewStates.Gone; 
-                    });
-                })).Start();
-
-
+                LoadEnquiryUserDetails(_items[position].PlayerId, commonDetails);
             };
 
             return view;
@@ -95,7 +88,7 @@ namespace MySportsBook
             get { return _items.Count; }
         }
 
-        public async Task LoadEnquiryUserDetails(int playerId, CommonDetails details)
+        public void LoadEnquiryUserDetails(int playerId, CommonDetails details)
         {
             Player player = new Player();
 

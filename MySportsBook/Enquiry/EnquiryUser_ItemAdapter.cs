@@ -21,7 +21,6 @@ namespace MySportsBook
 
         Activity context;
         IList<EnquiryModel> _items;
-        bool ViewCourtFirstClick = true;
         private LinearLayout progress;
         private CommonDetails commonDetails;
         Helper helper = new Helper();
@@ -69,14 +68,7 @@ namespace MySportsBook
             //var rlCourtItemMainContainer = (LinearLayout)view.FindViewById(Resource.Id.llCourt);
             llEnquiryUser.Click += delegate
             {
-
-                progress.Visibility = Android.Views.ViewStates.Visible;
-                new Thread(new ThreadStart(delegate
-                {
-                    context.RunOnUiThread(async () => { await LoadEnquiryUserDetails(_items[position].EnquiryId, commonDetails); progress.Visibility = Android.Views.ViewStates.Gone; });
-                })).Start();
-
-
+                LoadEnquiryUserDetails(_items[position].EnquiryId, commonDetails);
             };
             
             return view;
@@ -88,7 +80,7 @@ namespace MySportsBook
             get { return _items.Count; }
         }
         
-        public async Task LoadEnquiryUserDetails(int enquiryId, CommonDetails details)
+        public void LoadEnquiryUserDetails(int enquiryId, CommonDetails details)
         {
             EnquiryModel enquiryModel = new EnquiryModel();
 

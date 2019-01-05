@@ -60,10 +60,8 @@ namespace MySportsBook
             editTextSearchPlayer.TextChanged += EditTextSearchPlayer_TextChanged;
             imgSearch.Click += ImgSearch_Click;
 
+            LoadAttendanceAddPlayer(commonDetails);
 
-            linearProgressBar.Visibility = ViewStates.Visible;
-            new Thread(new ThreadStart(delegate { RunOnUiThread(async () => { await LoadAttendanceAddPlayer(commonDetails); }); }))
-                .Start();
 
         }
 
@@ -90,13 +88,12 @@ namespace MySportsBook
         {
             var result = playerList.Where(x => x.IsAddedPlayerForAttendance).ToList();
             Intent intent = new Intent(this, typeof(BatchPlayer));
-            
             intent.PutExtra("attendancePlayer", JsonConvert.SerializeObject(result));
             SetResult(Result.Ok, intent);
             Finish();
         }
 
-        private async Task LoadAttendanceAddPlayer(CommonDetails details)
+        private void LoadAttendanceAddPlayer(CommonDetails details)
         {
             ServiceHelper serviceHelper = new ServiceHelper();
             if (helper.CheckInternetConnection(this))

@@ -61,10 +61,7 @@ namespace MySportsBook
 
             btnNewEnquiry.Click += BtnNewEnquiry_Click;
 
-            //linearProgressBar.Visibility = ViewStates.Visible;
-            new Thread(new ThreadStart(delegate { RunOnUiThread(async () => { await LoadEnquiryUser(commonDetails); }); }))
-                .Start();
-
+            LoadEnquiryUser(commonDetails);
         }
 
         private void ImgSearch_Click(object sender, EventArgs e)
@@ -96,7 +93,7 @@ namespace MySportsBook
 
         }
 
-        private async Task LoadEnquiryUser(CommonDetails details)
+        private void LoadEnquiryUser(CommonDetails details)
         {
             ServiceHelper serviceHelper = new ServiceHelper();
             if (helper.CheckInternetConnection(this))
@@ -164,7 +161,7 @@ namespace MySportsBook
             }
         }
 
-        private async Task LoadEnquiryList(CommonDetails details)
+        private void LoadEnquiryList(CommonDetails details)
         {
             ServiceHelper serviceHelper = new ServiceHelper();
             if (helper.CheckInternetConnection(this))

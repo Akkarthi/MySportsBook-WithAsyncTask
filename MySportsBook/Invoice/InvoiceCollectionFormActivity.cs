@@ -158,17 +158,8 @@ namespace MySportsBook
             txtViewInvoiceBatch.Text = "Batch: " + selectedPlayer.BatchName;
 
             linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
-
-            new Thread(new ThreadStart(delegate
-            {
-                RunOnUiThread(async () =>
-                {
-                    await LoadInvoiceUserDetail(commonDetails);
-                    //linearProgressBar.Visibility = Android.Views.ViewStates.Gone;
-                });
-            })).Start();
-
-
+            
+            LoadInvoiceUserDetail(commonDetails);
 
 
             //linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
@@ -255,7 +246,7 @@ namespace MySportsBook
             inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
         }
 
-        public async Task LoadInvoiceUserDetail(CommonDetails details)
+        public void LoadInvoiceUserDetail(CommonDetails details)
         {
             if (helper.CheckInternetConnection(this))
             {

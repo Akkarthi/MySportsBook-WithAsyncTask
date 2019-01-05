@@ -13,9 +13,6 @@ namespace MySportsBook
     {
         Activity context;
         IList<Batch> _items;
-        IList<BatchList> _batchitems;
-        bool ViewBatchFirstClick = true;
-
 
         public Batch_ItemAdapter(Activity context, IList<Batch> items):base()
         {

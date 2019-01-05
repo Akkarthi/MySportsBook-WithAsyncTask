@@ -76,5 +76,4 @@ namespace MySportsBook
     {
         void InvoiceSaveInterface(bool responseResult);
     }
-
 }

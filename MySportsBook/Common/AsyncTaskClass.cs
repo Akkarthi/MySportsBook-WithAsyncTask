@@ -24,7 +24,6 @@ namespace MySportsBook
         private string response;
         private LoginInterface loginInterface;
         private VenueInterface venueInterface;
-        private VenueSportInterface venuesportInterface;
         private SportInterface sportInterface;
         private BatchInterface batchInterface;
         private BatchPlayerInterface batchPlayerInterface;
@@ -35,13 +34,10 @@ namespace MySportsBook
         private EnquirySaveInterface enquirySaveInterface;
         private AttendanceSaveInterface attendanceSaveInterface;
         private InvoiceSaveInterface invoiceSaveInterface;
-        private LoginActivity loginActivity;
         private Activity context;
         private LinearLayout linearProgress;
         private string page = string.Empty;
         private CommonDetails details;
-        private VenueActivity venueActivity;
-        private LinearLayout linearProgressBar;
         private string batchplayerSelectedDate = string.Empty;
         private Player invoiceSelectedPlayer=new Player();
         private EnquiryModel enquiryModel = new EnquiryModel();
@@ -221,19 +217,31 @@ namespace MySportsBook
 
         protected override void OnPostExecute(Java.Lang.Object result)
         {
-            //linearProgress.Visibility = ViewStates.Gone;
             if (page == "Login")
-            {
-                linearProgress.Visibility = ViewStates.Gone;
+            {                
                 Login login = new Login();
-                login = JsonConvert.DeserializeObject<Login>(result.ToString());
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
+                {
+                    try
+                    {
+                        login = JsonConvert.DeserializeObject<Login>(result.ToString());
+                    }
+                    catch (System.Exception)
+                    {
+                        login = null;
+                    }
+                }
+                else {
+                    login = null;
+                }
                 loginInterface = (LoginActivity)context;
                 loginInterface.LoginInterface(login);
+                linearProgress.Visibility = ViewStates.Gone;
             }
             else if (page == "Venue")
             {
                 List<Venue> venueList = new List<Venue>();
-                if (!string.IsNullOrEmpty(result.ToString()))
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
                 {
                     try
                     {
@@ -244,6 +252,10 @@ namespace MySportsBook
                         venueList = null;
                     }                    
                 }
+                else
+                {
+                    venueList = null;
+                }
                 venueInterface = (VenueActivity)context;
                 venueInterface.VenueInterface(venueList);
                 linearProgress.Visibility = ViewStates.Gone;
@@ -251,7 +263,7 @@ namespace MySportsBook
             else if (page == "Sport")
             {
                 List<Sport> sportList = new List<Sport>();
-                if (!string.IsNullOrEmpty(result.ToString()))                    
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))                    
                 {
                     try
                     {
@@ -262,6 +274,10 @@ namespace MySportsBook
                         sportList = null;
                     }
                 }
+                else
+                {
+                    sportList = null;
+                }
                 sportInterface = (SportActivity)context;
                 sportInterface.SportInterface(sportList);
                 linearProgress.Visibility = ViewStates.Gone;
@@ -269,7 +285,7 @@ namespace MySportsBook
             else if (page == "Batches")
             {
                 List<BatchCountModel> batchList = new List<BatchCountModel>();
-                if (!string.IsNullOrEmpty(result.ToString()))
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
                 {
                     try
                     {
@@ -280,6 +296,10 @@ namespace MySportsBook
                         batchList = null;
                     }
                 }
+                else
+                {
+                    batchList = null;
+                }
                 batchInterface = (BatchesActivity)context;
                 batchInterface.BatchInterface(batchList);
                 linearProgress.Visibility = ViewStates.Gone;
@@ -287,7 +307,7 @@ namespace MySportsBook
             else if (page == "BatchPlayer")
             {
                 List<Player> batchPlayerList = new List<Player>();
-                if (!string.IsNullOrEmpty(result.ToString()))                    
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))                    
                 {
                     try
                     {
@@ -298,6 +318,10 @@ namespace MySportsBook
                         batchPlayerList = null;
                     }
                 }
+                else
+                {
+                    batchPlayerList = null;
+                }
                 batchPlayerInterface = (BatchPlayer)context;
                 batchPlayerInterface.BatchPlayerInterface(batchPlayerList);
                 linearProgress.Visibility = ViewStates.Gone;
@@ -305,7 +329,7 @@ namespace MySportsBook
             else if (page == "AttendanceAddPlayer")
             {
                 List<Player> attendancePlayerList = new List<Player>();
-                if (!string.IsNullOrEmpty(result.ToString()))                    
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))                    
                 {
                     try
                     {
@@ -315,6 +339,10 @@ namespace MySportsBook
                     {
                         attendancePlayerList = null;
                     }
+                }
+                else
+                {
+                    attendancePlayerList = null;
                 }
                 attendanceAddPlayerAsyncInterface = (AttendanceAddPlayerActivity)context;
                 attendanceAddPlayerAsyncInterface.AttendanceAddPlayerAsyncInterface(attendancePlayerList);
@@ -334,7 +362,7 @@ namespace MySportsBook
             else if (page == "InvoiceUser")
             {
                 List<Player> invoiceUserList = new List<Player>();
-                if (!string.IsNullOrEmpty(result.ToString()))
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
                 {
                     try
                     {
@@ -345,6 +373,10 @@ namespace MySportsBook
                         invoiceUserList = null;
                     }
                 }
+                else
+                {
+                    invoiceUserList = null;
+                }
                 invoiceUserInterface = (InvoiceUserActivity)context;
                 invoiceUserInterface.InvoiceUserInterface(invoiceUserList);
                 linearProgress.Visibility = ViewStates.Gone;
@@ -352,7 +384,7 @@ namespace MySportsBook
             else if (page == "EnquiryUserList")
             {
                 List<EnquiryModel> enquiryModelsList = new List<EnquiryModel>();
-                if (!string.IsNullOrEmpty(result.ToString()))
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
                 {
                     try
                     {
@@ -362,6 +394,10 @@ namespace MySportsBook
                     {
                         enquiryModelsList = null;
                     }
+                }
+                else
+                {
+                    enquiryModelsList = null;
                 }
                 enquiryListInterface = (EnquiryUserActivity)context;
                 enquiryListInterface.EnquiryListInterface(enquiryModelsList);
@@ -383,7 +419,7 @@ namespace MySportsBook
             else if (page == "InvoiceUserByPlayer")
             {
                 List<InvoiceDetailsModel> invoiceDetailsModelsList = new List<InvoiceDetailsModel>();
-                if (!string.IsNullOrEmpty(result.ToString()))                    
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))                    
                 {
                     try
                     {
@@ -393,6 +429,10 @@ namespace MySportsBook
                     {
                         invoiceDetailsModelsList = null;
                     }
+                }
+                else
+                {
+                    invoiceDetailsModelsList = null;
                 }
                 invoiceUserByPlayerInterface = (InvoiceCollectionFormActivity)context;
                 invoiceUserByPlayerInterface.InvoiceUserByPlayerInterface(invoiceDetailsModelsList);
@@ -410,16 +450,6 @@ namespace MySportsBook
                 invoiceSaveInterface.InvoiceSaveInterface(resultResponse);
                 linearProgress.Visibility = ViewStates.Gone;
             }
-            //else if (page == "VenueSport")
-            //{
-            //    List<Sport> sportList = new List<Sport>();
-            //    if (!string.IsNullOrEmpty(result.ToString()))
-            //        sportList = JsonConvert.DeserializeObject<List<Sport>>(result.ToString());
-            //    venuesportInterface = (VenueActivity)context;
-            //    venuesportInterface.VenueSportInterface(sportList);
-            //}
         }
-
-
     }
 }

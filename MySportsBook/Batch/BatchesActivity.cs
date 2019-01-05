@@ -23,12 +23,8 @@ namespace MySportsBook
     public class BatchesActivity : MenuActivity, BatchUpdate_Interface,BatchInterface
     {
         public static List<Batch> _items;
-        Batch_ItemAdapter batch_ItemAdapter;
-        TextView lblAppname;
         TextView lblHeader;
-        ListView lstBatches;
         private GridView grdView;
-        private List<BatchCountModel> batchCountModel;
         private string selectedCourtName = string.Empty;
         Helper helper = new Helper();
 
@@ -44,10 +40,8 @@ namespace MySportsBook
             commonDetails = JsonConvert.DeserializeObject<CommonDetails>(Intent.GetStringExtra("details"));
 
             lblHeader = FindViewById<TextView>(Resource.Id.lblheader);
-            //lstBatches = FindViewById<ListView>(Resource.Id.lstBatches);
             grdView = FindViewById<GridView>(Resource.Id.gridBatch);
             linearProgressBar = FindViewById<LinearLayout>(Resource.Id.linearProgressBar);
-
             linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
 
             //for regular text getting Montserrat-Light.otf
@@ -56,19 +50,10 @@ namespace MySportsBook
 
             lblHeader.SetTypeface(faceRegular, TypefaceStyle.Bold);
 
-            new Thread(new ThreadStart(delegate
-            {
-                RunOnUiThread(async () =>
-                {
-                    await LoadBatches(commonDetails);
-                    //linearProgressBar.Visibility = Android.Views.ViewStates.Gone;
-                });
-            })).Start();
-
-
+            LoadBatches(commonDetails);
         }
 
-        private async Task LoadBatches(CommonDetails details)
+        private void LoadBatches(CommonDetails details)
         {
             if (helper.CheckInternetConnection(this))
             {
@@ -76,30 +61,6 @@ namespace MySportsBook
                 {
                     AysncTaskClass aysncTaskClass = new AysncTaskClass(commonDetails, this, linearProgressBar, "Batches");
                     aysncTaskClass.Execute("Batches");
-
-                    //ServiceHelper serviceHelper = new ServiceHelper();
-
-                    //List<BatchCountModel> batchList = new List<BatchCountModel>();
-                    //batchList = serviceHelper.GetBatch(details.access_token, details.VenueId, details.SportId,
-                    //    details.CourtId);
-                    //if (batchList != null && batchList.Count > 0)
-                    //{
-                    //    if (commonDetails.isAttendance)
-                    //        batchList = batchList.Where(x => x.IsAttendanceRequired).ToList();
-                    //    if (batchList.Count > 0)
-                    //    {
-                    //        adapter = new GridBatchAdpater(this, batchList, linearProgressBar, details);
-                    //        grdView.SetAdapter(adapter);
-                    //    }
-                    //    else
-                    //    {
-                    //        helper.AlertPopUp("Warning", "There is no data available", this);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    helper.AlertPopUp("Warning", "There is no data available", this);
-                    //}
                 }
                 catch (Exception e)
                 {
@@ -156,7 +117,6 @@ namespace MySportsBook
         {
             if (helper.CheckInternetConnection(this))
             {
-                //Intent intent = new Intent(this, typeof(CourtActivity));
                 Intent intent = new Intent(this, typeof(SportActivity));
                 intent.AddFlags(ActivityFlags.ClearTop);
                 intent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
