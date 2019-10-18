@@ -34,6 +34,7 @@ namespace MySportsBook
         private EnquirySaveInterface enquirySaveInterface;
         private AttendanceSaveInterface attendanceSaveInterface;
         private InvoiceSaveInterface invoiceSaveInterface;
+        private LoginLandingInterface loginLandingInterface;
         private Activity context;
         private LinearLayout linearProgress;
         private string page = string.Empty;
@@ -43,11 +44,20 @@ namespace MySportsBook
         private EnquiryModel enquiryModel = new EnquiryModel();
         private List<Attendance> attendances = new List<Attendance>();
         private InvoiceModel invoiceModel = new InvoiceModel();
+        private List<VenueSport> venueSports = new List<VenueSport>();
 
         public AysncTaskClass(string text1, string text2, LoginActivity loginActivity, LinearLayout linearProgressBar, string pageName)
         {
             this.text1 = text1;
             this.text2 = text2;
+            context = loginActivity;
+            linearProgress = linearProgressBar;
+            page = pageName;
+        }
+
+        public AysncTaskClass(CommonDetails commonDetails, LoginActivity loginActivity, LinearLayout linearProgressBar, string pageName)
+        {
+            this.details = commonDetails;
             context = loginActivity;
             linearProgress = linearProgressBar;
             page = pageName;
@@ -159,6 +169,10 @@ namespace MySportsBook
             {
                 response = serviceHelper.GetLoginResponse(text1, text2);
             }
+            if (@params[0] == "LoginCheckLanding")
+            {
+                response = serviceHelper.GetLoginLandingResponse(details.access_token);
+            }
             else if (@params[0] == "Venue")
             {
                 response = serviceHelper.GetVenueResponse(details.access_token);
@@ -238,6 +252,27 @@ namespace MySportsBook
                 loginInterface.LoginInterface(login);
                 linearProgress.Visibility = ViewStates.Gone;
             }
+            else if (page == "LoginCheckLanding")
+            {
+                if (result != null && !string.IsNullOrEmpty(result.ToString()))
+                {
+                    try
+                    {
+                        venueSports = JsonConvert.DeserializeObject<List<VenueSport>>(result.ToString());
+                    }
+                    catch (System.Exception)
+                    {
+                        venueSports = null;
+                    }
+                }
+                else
+                {
+                    venueSports = null;
+                }
+                loginLandingInterface = (LoginActivity)context;
+                loginLandingInterface.LoginLandingInterface(venueSports);
+                linearProgress.Visibility = ViewStates.Gone;
+            }            
             else if (page == "Venue")
             {
                 List<Venue> venueList = new List<Venue>();

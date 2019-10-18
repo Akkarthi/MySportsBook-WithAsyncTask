@@ -20,7 +20,7 @@ namespace MySportsBook
     public class ServiceHelper
     {
         private static readonly HttpClient client = new HttpClient();
-        public static string urlAddress = "http://18.191.204.210:8080/";
+        public static string urlAddress = "http://mysportsbook.in:90/";
         //public static string urlAddress = "http://3.16.25.33:8080/";
 
         public string GetLoginResponse(string username, string password)
@@ -54,6 +54,37 @@ namespace MySportsBook
             {
                 return null;
             }
+        }
+
+        public string GetLoginLandingResponse(string token)
+        {
+            string responseResult = string.Empty;
+            string url = urlAddress + "api/venue/0";
+            try
+            {
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                using (var client = new HttpClient())
+                {
+                    if (!string.IsNullOrWhiteSpace(token))
+                    {
+                        client.DefaultRequestHeaders.Clear();
+                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                    }
+                    var response = client.GetAsync(url).Result;
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    if (result != null)
+                    {
+                        responseResult = result.ToString();
+                    }
+                }
+
+                return responseResult;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
 
 

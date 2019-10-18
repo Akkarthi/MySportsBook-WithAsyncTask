@@ -373,7 +373,7 @@ namespace MySportsBook
 
             try
             {
-                var totalAmount = invoiceDetailsModelsList.Where(x => x.InvoicePeriod == selectedText)
+                var totalAmount = invoiceDetailsModelsList.Where(x => x.InvoicePeriod == selectedText.Split(" - ")[0])
                     .Select(x => x.Fee).FirstOrDefault();
 
                 editTextInvoiceTotalAmount.Text = totalAmount.ToString();
@@ -437,7 +437,7 @@ namespace MySportsBook
 
             List<InvoiceDetailsModel> selectedinvoiceDetailsModel = new List<InvoiceDetailsModel>();
 
-            selectedinvoiceDetailsModel = invoiceDetailsModelsList.Where(x => x.InvoicePeriod == selectedInvoicePeriod).ToList();
+            selectedinvoiceDetailsModel = invoiceDetailsModelsList.Where(x => x.InvoicePeriod == selectedInvoicePeriod.Split(" - ")[0] && x.SportName== selectedInvoicePeriod.Split(" - ")[1]).ToList();
 
             InvoiceModel invoiceModel = new InvoiceModel();
 
@@ -452,7 +452,8 @@ namespace MySportsBook
             invoiceModel.Comments = editTextInvoiceRemarks.Text;
 
             invoiceModel.InvoiceDetails = selectedinvoiceDetailsModel;
-            invoiceModel.InvoiceDate = Convert.ToDateTime(DateTime.Now.ToString("MM-dd-yyyy"));
+            //invoiceModel.InvoiceDate = Convert.ToDateTime(DateTime.Now.ToString("MM-dd-yyyy"));
+            invoiceModel.InvoiceDate = Convert.ToDateTime(DateTime.Now);
 
             linearProgressBar.Visibility = Android.Views.ViewStates.Visible;
 
@@ -461,8 +462,16 @@ namespace MySportsBook
                 && Convert.ToDouble(invoiceModel.TotalPaidAmount) >= 0)
             {
                 double amountSum = 0;
-                amountSum = (Convert.ToDouble(invoiceModel.TotalPaidAmount) + Convert.ToDouble(invoiceModel.TotalOtherAmount)) -
-                            Convert.ToDouble(invoiceModel.TotalDiscount);
+                //Comment to sort out Total Fee 500 Discount 500 then shown alert
+                //amountSum = (Convert.ToDouble(invoiceModel.TotalPaidAmount) + Convert.ToDouble(invoiceModel.TotalOtherAmount)) -
+                //            Convert.ToDouble(invoiceModel.TotalDiscount);
+                if (invoiceModel.TotalPaidAmount != 0)
+                    amountSum = Convert.ToDouble(invoiceModel.TotalPaidAmount);
+                else
+                {
+                    amountSum = (Convert.ToDouble(invoiceModel.TotalPaidAmount) + Convert.ToDouble(invoiceModel.TotalOtherAmount)) -
+                                Convert.ToDouble(invoiceModel.TotalDiscount);
+                }
                 if (amountSum != 0)
                 {
                     if (amountSum <= Convert.ToDouble(invoiceModel.TotalFee))
@@ -589,7 +598,7 @@ namespace MySportsBook
                 invoicePeriodList.Add("Select");
                 foreach (var name in invoiceDetailsModelsList)
                 {
-                    invoicePeriodList.Add(name.InvoicePeriod);
+                    invoicePeriodList.Add(name.InvoicePeriod + " - " + name.SportName);
 
                 }
 

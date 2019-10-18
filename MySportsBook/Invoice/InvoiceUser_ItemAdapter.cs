@@ -59,7 +59,8 @@ namespace MySportsBook
             var txtInvoiceUserMobile = view.FindViewById<TextView>(Resource.Id.txtInvoiceUserMobile);
             var txtInvoiceUserBatch = view.FindViewById<TextView>(Resource.Id.txtInvoiceUserBatch);
             var txtInvoiceUserAmount = view.FindViewById<TextView>(Resource.Id.txtInvoiceUserAmount);
-            var llInvoiceUserContainer = view.FindViewById<LinearLayout>(Resource.Id.llInvoiceUserContainer);
+            var llInvoiceUserContainer = view.FindViewById<RelativeLayout>(Resource.Id.llInvoiceUserContainer);
+            var btnViewHistory = view.FindViewById<Button>(Resource.Id.btnView);
 
             txtInvoiceUserName.Text = _items[position].FirstName+" "+ _items[position].LastName;
             txtInvoiceUserMobile.Text = _items[position].Mobile;
@@ -77,6 +78,10 @@ namespace MySportsBook
             {
 
                 LoadEnquiryUserDetails(_items[position].PlayerId, commonDetails);
+            };
+
+            btnViewHistory.Click += delegate {
+                LoadViewInvoiceHistory(_items[position].PlayerId, commonDetails);
             };
 
             return view;
@@ -97,6 +102,24 @@ namespace MySportsBook
             if (helper.CheckInternetConnection(context))
             {
                 var intent = new Intent(context, typeof(InvoiceCollectionFormActivity));
+                intent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
+                intent.PutExtra("invoicePlayer", JsonConvert.SerializeObject(player));
+                context.StartActivity(intent);
+            }
+            else
+            {
+                helper.AlertPopUp("Warning", "Please enable mobile data", context);
+            }
+        }
+
+        public void LoadViewInvoiceHistory(int playerId, CommonDetails details) {
+            Player player = new Player();
+
+            player = _items.Where(x => x.PlayerId == playerId).FirstOrDefault();
+
+            if (helper.CheckInternetConnection(context))
+            {
+                var intent = new Intent(context, typeof(InvoiceUserHistoryActivity));
                 intent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
                 intent.PutExtra("invoicePlayer", JsonConvert.SerializeObject(player));
                 context.StartActivity(intent);

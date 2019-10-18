@@ -17,6 +17,11 @@ namespace MySportsBook
         void LoginInterface(Login login);
     }
 
+    public interface LoginLandingInterface
+    {
+        void LoginLandingInterface(List<VenueSport> venueSports);
+    }
+
     public interface VenueInterface
     {
         void VenueInterface(List<Venue> venue);

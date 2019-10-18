@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rlInvoiceUserItemMainContainer">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llInvoiceUserContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
@@ -12,13 +12,42 @@
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/userlistitemborder">
+        android:background="@drawable/userlistitemborder"
+		>
+		<RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/rlRightContainer"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="@dimen/_5sdp"
+			android:layout_marginLeft="@dimen/_5sdp"
+			>
+           <Button
+                        android:id="@+id/btnView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttonstyle"
+                        android:text="View"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="#FFFFFF"
+						 android:padding="@dimen/_5sdp"
+						 android:visibility="gone"/>
+        </RelativeLayout>
+		<LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/rlRightContainer">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/rlInvoiceUserLeftImage"
             android:gravity="center"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+			>
             <ImageView
                 android:id="@+id/imgIcon"
                 android:layout_width="wrap_content"
@@ -31,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+			>
             <LinearLayout
                 android:id="@+id/llInvoiceUserFirstContainer"
                 android:layout_width="match_parent"
@@ -62,37 +92,7 @@
                     android:text="5 AM"
                     android:textColor="#000000"
                     android:textSize="@dimen/_12sdp" />
-            </LinearLayout>
-        <!--<LinearLayout
-                android:id="@+id/llInvoiceUserFirstContainer"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginBottom="@dimen/_2sdp">
-                <TextView
-                    android:id="@+id/txtInvoiceUserName"
-                    android:layout_width="wrap_content"
-                    android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:text="Karthikeyan A"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_weight="1.5" />
-                <TextView
-                    android:id="@+id/txtInvoiceUserBatch"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content"
-                    android:text="5AM"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:background="#CCCCCC"
-                    android:layout_margin="@dimen/_2sdp"
-                    android:padding="@dimen/_5sdp" />
-            </LinearLayout>-->
+            </LinearLayout>        
             <LinearLayout
                 android:id="@+id/llInvoiceUserSecondContainer1"
                 android:layout_width="match_parent"
@@ -127,5 +127,6 @@
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
         </RelativeLayout>
-    </LinearLayout>
+		</LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -15,7 +15,7 @@ namespace MySportsBook
 {
     [Activity(Label = "My SportsBook", MainLauncher = true,
         ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class LoginActivity : Activity, LoginInterface
+    public class LoginActivity : Activity, LoginInterface,LoginLandingInterface
     {
 
         #region Declaration
@@ -185,96 +185,107 @@ namespace MySportsBook
 
         public void CheckLandingPage(CommonDetails details)
         {
-            ServiceHelper serviceHelper;
-            serviceHelper = new ServiceHelper();
-            //Check More than one Venue
-            List<Venue> venueList = new List<Venue>();
-            List<Sport> sportList = new List<Sport>();
-            List<Court> courtList = new List<Court>();
-            List<BatchCountModel> batchList = new List<BatchCountModel>();
-
-            venueList = serviceHelper.GetVenue(details.access_token);
-
-            if (venueList != null && venueList.Count > 0)
+            try
             {
-                if (venueList.Count > 1)
-                {
-                    var venueIntent = new Intent(this, typeof(VenueActivity));
-                    venueIntent.PutExtra("isLogin", "1");
-                    venueIntent.PutExtra("details", JsonConvert.SerializeObject(details));
-                    StartActivity(venueIntent);
-                    Finish();
-                }
-                else
-                {
-                    serviceHelper = new ServiceHelper();
-
-                    details.VenueId = venueList[0].VenueId.ToString();
-                    details.VenueCode = venueList[0].VenueCode.ToString();
-
-
-
-                    sportList = serviceHelper.GetSports(details.access_token, details.VenueId);
-
-
-                    if (sportList != null && sportList.Count > 0)
-                    {
-                        if (sportList.Count > 1)
-                        {
-                            var sportIntent = new Intent(this, typeof(SportActivity));
-                            sportIntent.PutExtra("details", JsonConvert.SerializeObject(details));
-                            StartActivity(sportIntent);
-                            Finish();
-                        }
-                        else
-                        {
-                            serviceHelper = new ServiceHelper();
-
-                            details.SportId = sportList[0].SportId.ToString();
-
-                            courtList = serviceHelper.GetCourt(details.access_token, details.VenueId, details.SportId);
-                            if (courtList != null && courtList.Count > 0)
-                            {
-                                //if (courtList.Count > 1)
-                                //{
-                                //    var courtIntent = new Intent(this, typeof(CourtActivity));
-                                //    courtIntent.PutExtra("details", JsonConvert.SerializeObject(details));
-                                //    StartActivity(courtIntent);
-                                //    Finish();
-                                //}
-                                //else
-                                //{
-                                //    serviceHelper = new ServiceHelper();
-
-                                //    details.CourtId = courtList[0].CourtId.ToString();
-
-                                //    batchList = serviceHelper.GetBatch(details.access_token, details.VenueId, details.SportId, details.CourtId);
-                                details.CourtId = "0";
-                                var batchesIntent = new Intent(this, typeof(BatchesActivity));
-                                batchesIntent.PutExtra("details", JsonConvert.SerializeObject(details));
-                                StartActivity(batchesIntent);
-                                Finish();
-                                //}
-                            }
-                            else
-                            {
-                                helper.AlertPopUp("Warning", "There are no court available", this);
-                            }
-
-                        }
-                    }
-                    else
-                    {
-                        helper.AlertPopUp("Warning", "There are no sport available", this);
-
-                    }
-                }
-
+                AysncTaskClass aysncTaskClass = new AysncTaskClass(details, this,
+                            linearProgressBar, "LoginCheckLanding");
+                aysncTaskClass.Execute("LoginCheckLanding");
             }
-            else
+            catch (Exception)
             {
                 helper.AlertPopUp("Warning", "There are no venue available", this);
             }
+
+            //ServiceHelper serviceHelper;
+            //serviceHelper = new ServiceHelper();
+            ////Check More than one Venue
+            //List<Venue> venueList = new List<Venue>();
+            //List<Sport> sportList = new List<Sport>();
+            //List<Court> courtList = new List<Court>();
+            //List<BatchCountModel> batchList = new List<BatchCountModel>();
+
+            //venueList = serviceHelper.GetVenue(details.access_token);
+
+            //if (venueList != null && venueList.Count > 0)
+            //{
+            //    if (venueList.Count > 1)
+            //    {
+            //        var venueIntent = new Intent(this, typeof(VenueActivity));
+            //        venueIntent.PutExtra("isLogin", "1");
+            //        venueIntent.PutExtra("details", JsonConvert.SerializeObject(details));
+            //        StartActivity(venueIntent);
+            //        Finish();
+            //    }
+            //    else
+            //    {
+            //        serviceHelper = new ServiceHelper();
+
+            //        details.VenueId = venueList[0].VenueId.ToString();
+            //        details.VenueCode = venueList[0].VenueCode.ToString();
+
+
+
+            //        sportList = serviceHelper.GetSports(details.access_token, details.VenueId);
+
+
+            //        if (sportList != null && sportList.Count > 0)
+            //        {
+            //            if (sportList.Count > 1)
+            //            {
+            //                var sportIntent = new Intent(this, typeof(SportActivity));
+            //                sportIntent.PutExtra("details", JsonConvert.SerializeObject(details));
+            //                StartActivity(sportIntent);
+            //                Finish();
+            //            }
+            //            else
+            //            {
+            //                serviceHelper = new ServiceHelper();
+
+            //                details.SportId = sportList[0].SportId.ToString();
+
+            //                courtList = serviceHelper.GetCourt(details.access_token, details.VenueId, details.SportId);
+            //                if (courtList != null && courtList.Count > 0)
+            //                {
+            //                    //if (courtList.Count > 1)
+            //                    //{
+            //                    //    var courtIntent = new Intent(this, typeof(CourtActivity));
+            //                    //    courtIntent.PutExtra("details", JsonConvert.SerializeObject(details));
+            //                    //    StartActivity(courtIntent);
+            //                    //    Finish();
+            //                    //}
+            //                    //else
+            //                    //{
+            //                    //    serviceHelper = new ServiceHelper();
+
+            //                    //    details.CourtId = courtList[0].CourtId.ToString();
+
+            //                    //    batchList = serviceHelper.GetBatch(details.access_token, details.VenueId, details.SportId, details.CourtId);
+            //                    details.CourtId = "0";
+            //                    var batchesIntent = new Intent(this, typeof(BatchesActivity));
+            //                    batchesIntent.PutExtra("details", JsonConvert.SerializeObject(details));
+            //                    StartActivity(batchesIntent);
+            //                    Finish();
+            //                    //}
+            //                }
+            //                else
+            //                {
+            //                    helper.AlertPopUp("Warning", "There are no court available", this);
+            //                }
+
+            //            }
+            //        }
+            //        else
+            //        {
+            //            helper.AlertPopUp("Warning", "There are no sport available", this);
+
+            //        }
+            //    }
+
+            //}
+            //else
+            //{
+            //    helper.AlertPopUp("Warning", "There are no venue available", this);
+            //}
 
         }
 
@@ -355,6 +366,44 @@ namespace MySportsBook
             {
                 helper.AlertPopUp("Error", "Unable to login. Please check credential", this);
                 linearProgressBar.Visibility = ViewStates.Gone;
+            }
+        }
+
+        public void LoginLandingInterface(List<VenueSport> venueSports)
+        {
+            if (venueSports != null && venueSports.Count > 0)
+            {
+                if (venueSports.Count == 1)
+                {
+                    commonDetails.VenueId = venueSports[0].VenueId.ToString();
+                    commonDetails.VenueCode = venueSports[0].VenueCode.ToString();
+                    if (venueSports.Count == 1)
+                    {
+                        commonDetails.SportId = "0";//venueSports[0].SportModels[0].SportId.ToString();
+                        commonDetails.CourtId = "0";
+                        var batchesIntent = new Intent(this, typeof(BatchesActivity));
+                        batchesIntent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
+                        StartActivity(batchesIntent);
+                        Finish();
+                    }
+                    else
+                    {
+                        var sportIntent = new Intent(this, typeof(SportActivity));
+                        sportIntent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
+                        StartActivity(sportIntent);
+                        Finish();
+                    }
+                }
+                else {
+                    var venueIntent = new Intent(this, typeof(VenueActivity));
+                    venueIntent.PutExtra("isLogin", "1");
+                    venueIntent.PutExtra("details", JsonConvert.SerializeObject(commonDetails));
+                    StartActivity(venueIntent);
+                    Finish();
+                }
+            }
+            else {
+                helper.AlertPopUp("Warning", "There are no venue available", this);
             }
         }
     }

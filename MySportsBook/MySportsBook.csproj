@@ -15,7 +15,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -47,6 +47,7 @@
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
+    <MandroidI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -105,11 +106,14 @@
     <Compile Include="Entity\Root.cs" />
     <Compile Include="Entity\Sport.cs" />
     <Compile Include="Entity\Venue.cs" />
+    <Compile Include="Entity\VenueSport.cs" />
     <Compile Include="Games\EnquiryGamesInterface.cs" />
     <Compile Include="Games\GamesActivity.cs" />
     <Compile Include="Games\Game_ItemAdapter.cs" />
     <Compile Include="Invoice\InvoiceCollectionFormActivity.cs" />
     <Compile Include="Invoice\InvoiceUserActivity.cs" />
+    <Compile Include="Invoice\InvoiceUserHistoryActivity.cs" />
+    <Compile Include="Invoice\InvoiceUserHistory_ItemAdapter.cs" />
     <Compile Include="Invoice\InvoiceUser_ItemAdapter.cs" />
     <Compile Include="Login\LoginActivity.cs" />
     <Compile Include="MenuDrawer\MenuActivity.cs" />
@@ -655,6 +659,26 @@
     <AndroidResource Include="Resources\drawable\AlertDialogStyle.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\InvoiceUserHistory.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
